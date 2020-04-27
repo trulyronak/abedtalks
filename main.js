@@ -40,6 +40,7 @@ T = new Twit(config.twitter);
 
 async function main() {
     const quote = await randomQuote();
+    console.log(`Attempting to Tweet ${quote}`)
 
     T.post('statuses/update', { status: quote }, function(err, data, response) {
         if (err){
@@ -48,6 +49,7 @@ async function main() {
         }
         else{
             console.log("Great success!");
+            console.log(response.url)
         }
         });        
 }
