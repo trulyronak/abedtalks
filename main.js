@@ -1,12 +1,31 @@
 require("dotenv").config();
 
 /// rewrite this to be actually webscraping and whatnot
-function randomQuote() {
-    const abed_array= [" How did we get the short straw?", "We can't both do the zinger."];  
-    const chosen_quote = abed_array[Math.floor(Math.random()*abed_array.length)];
-  
-    return chosen_quote;
-}
+async function randomQuote() {
+    let getquote = new Promise((success, nosuccess) => {
+
+        const { spawn } = require('child_process');
+        const pyprog = spawn('python', ['./webscrape.py']);
+    
+        console.log("running")
+
+        pyprog.stdout.on('data', function(data) {
+            success(data);
+        });
+    
+        pyprog.stderr.on('data', (data) => {
+            nosuccess(data);
+        });
+    });
+    
+    try {
+        let quote = await getquote;
+        console.log(quote.toString());
+        return quote
+    } catch (err) {
+        return "Error getting quote"
+    }
+} 
 
 var Twit = require('twit'),
 config = {
