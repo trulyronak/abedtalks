@@ -18,7 +18,7 @@ access_token_secret: process.env.ACCESS_TOKEN_SECRET
 },
 T = new Twit(config.twitter);
 
-T.post('statuses/update', { status: randomQuote() }, function(err, data, response) {
+T.post('statuses/update', { status: process.env.MESSAGE }, function(err, data, response) {
 if (err){
     console.log('Error!');
     console.log(err);
