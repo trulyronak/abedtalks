@@ -7,7 +7,7 @@ async function randomQuote() {
         const { spawn } = require('child_process');
         const pyprog = spawn('python', ['./webscrape.py']);
     
-        console.log("running")
+        // console.log("running")
 
         pyprog.stdout.on('data', function(data) {
             success(data);
@@ -20,9 +20,9 @@ async function randomQuote() {
     
     try {
         let quote = await getquote;
-        console.log(quote.toString());
-        return quote
+        return quote.toString();
     } catch (err) {
+        console.log(err.toString())
         return "Error getting quote"
     }
 } 
@@ -38,12 +38,18 @@ access_token_secret: process.env.ACCESS_TOKEN_SECRET
 },
 T = new Twit(config.twitter);
 
-T.post('statuses/update', { status: process.env.MESSAGE }, function(err, data, response) {
-if (err){
-    console.log('Error!');
-    console.log(err);
+async function main() {
+    const quote = await randomQuote();
+
+    T.post('statuses/update', { status: quote }, function(err, data, response) {
+        if (err){
+            console.log('Error!');
+            console.log(err);
+        }
+        else{
+            console.log("Great success!");
+        }
+        });        
 }
-else{
-    console.log("Great success!");
-}
-});
+
+main();
