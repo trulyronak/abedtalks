@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+/// rewrite this to be actually webscraping and whatnot
 function randomQuote() {
     const abed_array= [" How did we get the short straw?", "We can't both do the zinger."];  
     const chosen_quote = abed_array[Math.floor(Math.random()*abed_array.length)];
