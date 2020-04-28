@@ -5,9 +5,6 @@ import random
 quotes = []
 
 def webScrapeData():
-    # TODO: WOrk this with US States as well
-    # print("data web scraped")
-
     for i in range(1, 12):
         url = "https://www.tvfanatic.com/quotes/characters/abed/page-" + str(i) + ".html"
         page = requests.get(url)
@@ -18,6 +15,8 @@ def webScrapeData():
 
         for block in abed_quotes:
             quote = block.find('p')
+            for br in quote.findAll("br"):
+                br.replace_with("\n")
             quotes.append(quote.text)
     return quotes
 
