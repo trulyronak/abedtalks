@@ -1,1 +1,1 @@
-Hear the prophet [@totallyabed](https://twitter.com/totallyabed)
+Hear the prophet [@abedspeaks](https://twitter.com/abedspeaks)
